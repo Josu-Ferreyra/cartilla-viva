@@ -21,4 +21,4 @@ La base no tiene funciones para armar los textos de las etiquetas de estado ni p
 - «Escribir por WhatsApp» y «Llamar» son `<a href="#">` sin pantalla en la demo: cancelan la navegación para no volver a la búsqueda.
 - Si el paciente reportó más de una obra social, se muestra un renglón «Reportaste…» por cada una.
 - La fila de resultado no se parte en escritorio (`flex-wrap: nowrap`): con el ancho de la columna (unos 710 px), el `flex: 1 1 220px` del enunciado mandaba «Ver perfil →» a otro renglón. El bloque del nombre se achica y su texto baja de renglón. Debajo de 760 px la fila vuelve a partirse.
-- El puntaje y la cantidad de reseñas salen de `prof.rating` y `prof.cantResenas` (datos de prueba): no se recalculan cuando se publica una reseña nueva.
+- El puntaje y la cantidad de reseñas se calculan con `selResumenResenas` a partir de las reseñas publicadas, así que buscador, perfil y listado de reseñas siempre coinciden y se actualizan al publicar o eliminar una. `rating` y `cantResenas` de `datos.js` solo sirven de objetivo para generar las reseñas de ejemplo (`core/resenasSemilla.js`).

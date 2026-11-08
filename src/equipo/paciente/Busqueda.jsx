@@ -3,9 +3,9 @@ import Header from '../../componentes/Header.jsx';
 import Chip from '../../componentes/Chip.jsx';
 import Avatar from '../../componentes/Avatar.jsx';
 import Selector from '../../componentes/Selector.jsx';
-import { useApp } from '../../core/store.jsx';
+import { useApp, selResumenResenas } from '../../core/store.jsx';
 import { ESPECIALIDADES, COBERTURAS, ZONAS, BUSQUEDA_INICIAL } from '../../core/datos.js';
-import { ESTADO_COBERTURA, numero, iniciales } from '../../core/formato.js';
+import { ESTADO_COBERTURA, numero, puntaje, iniciales } from '../../core/formato.js';
 import { buscar, anunciosPara } from './buscador.js';
 import { textoChipBusqueda, resultados } from './textos.js';
 import './paciente.css';
@@ -19,7 +19,7 @@ const CAMPOS = [
   { clave: 'zona', rotulo: 'Zona', opciones: ZONAS },
 ];
 
-function FilaResultado({ prof, cob, ahora }) {
+function FilaResultado({ prof, cob, ahora, resumen }) {
   return (
     <article className="cv-tarjeta pac-fila">
       <Avatar iniciales={iniciales(prof.nombre)} tono={prof.avatar} tam={52} />
@@ -31,7 +31,7 @@ function FilaResultado({ prof, cob, ahora }) {
       </div>
       <Chip tono={ESTADO_COBERTURA[cob.estado].tono}>{textoChipBusqueda(cob, ahora)}</Chip>
       <p className="cv-meta pac-puntaje">
-        <strong>{numero(prof.rating)}</strong> · {prof.cantResenas}
+        <strong>{puntaje(resumen.rating)}</strong> · {resumen.cantidad}
         <span className="cv-sr"> reseñas</span>
       </p>
       <a className="pac-ver-perfil" href={`#/perfil/${prof.id}`}>
@@ -86,7 +86,7 @@ export default function Busqueda() {
             {lista.length > 0 ? (
               <ol className="pac-lista">
                 {lista.map(({ prof, cob }) => (
-                  <li key={prof.id}><FilaResultado prof={prof} cob={cob} ahora={estado.ahora} /></li>
+                  <li key={prof.id}><FilaResultado prof={prof} cob={cob} ahora={estado.ahora} resumen={selResumenResenas(estado, prof.id)} /></li>
                 ))}
               </ol>
             ) : (

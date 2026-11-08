@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Header from '../../componentes/Header.jsx';
 import Estrellas from '../../componentes/Estrellas.jsx';
-import { useApp, selProf, selResenasPublicadas } from '../../core/store.jsx';
-import { haceTiempo, numero, conArticulo } from '../../core/formato.js';
+import { useApp, selProf, selResenasPublicadas, selResumenResenas } from '../../core/store.jsx';
+import { haceTiempo, puntaje, conArticulo } from '../../core/formato.js';
 import './paciente.css';
 
 const ESTRELLAS = [5, 4, 3, 2, 1];
@@ -37,7 +37,7 @@ export default function ResenasProfesional({ profId }) {
       <main className="cv-contenedor cv-main">
         <h1 className="cv-titulo-1 cv-titulo-1--m">Reseñas sobre {conArticulo(prof)}</h1>
         <p className="cv-subtitulo">
-          {numero(prof.rating)} de 5 · {publicadas.length} {plural(publicadas.length, 'reseña publicada', 'reseñas publicadas')}
+          {puntaje(selResumenResenas(estado, prof.id).rating)} de 5 · {publicadas.length} {plural(publicadas.length, 'reseña publicada', 'reseñas publicadas')}
         </p>
 
         <div className="pac-resenas-lista cv-pila cv-gap-16">

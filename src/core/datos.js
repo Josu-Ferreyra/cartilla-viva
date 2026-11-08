@@ -1,3 +1,5 @@
+import { crearResenasSemilla } from './resenasSemilla.js';
+
 export const ESPECIALIDADES = ['Psicología', 'Clínica médica', 'Pediatría', 'Nutrición'];
 export const COBERTURAS = ['OSEP', 'OSDE'];               // 'Particular' no es obra social: no se verifica ni se busca
 export const ZONAS = ['Godoy Cruz', 'Ciudad de Mendoza', 'Luján de Cuyo', 'Guaymallén'];
@@ -87,9 +89,24 @@ export const MATRICULAS = Object.fromEntries(PROFESIONALES.map((p, i) => {
 // Umbrales que usa A1/A3 para abrir una disputa (los lee reglas.reportarNoAtiende).
 export const REGLAS_INICIALES = { umbralReportes: 3, ventanaDias: 7 };
 
+// Reseñas explícitas; crearResenasSemilla completa el resto hasta `cantResenas` de cada profesional.
+const RESENAS_EXPLICITAS = [
+  { id: 'res1', profId: 'ruiz', pacienteId: 'pac9', puntaje: 5, hora: -336, estado: 'publicada',
+    texto: 'Muy clara y puntual. Me ayudó a ordenar el tratamiento desde la primera consulta.', moderacion: null, mensajeOperador: null,
+    respuesta: { texto: 'Gracias por tu comentario, me alegra que te haya servido.', hora: -330 } },
+  { id: 'res2', profId: 'ruiz', pacienteId: 'pac6', puntaje: 4, hora: -190, estado: 'publicada',
+    texto: 'Escucha con atención y explica bien cada paso. Los turnos a veces se demoran unos minutos.', moderacion: null, mensajeOperador: null },
+  { id: 'res3', profId: 'ruiz', pacienteId: 'pac7', puntaje: 5, hora: -70, estado: 'publicada',
+    texto: 'Me sentí cómodo desde la primera sesión. Muy recomendable.', moderacion: null, mensajeOperador: null },
+  { id: 'res4', profId: 'herrera', pacienteId: 'pac1', puntaje: 5, hora: -120, estado: 'publicada',
+    texto: 'Cálido y profesional. Las sesiones online funcionan muy bien.', moderacion: null, mensajeOperador: null },
+  { id: 'res5', profId: 'paez', pacienteId: 'pac1', puntaje: 4, hora: -400, estado: 'publicada',
+    texto: 'Atendió a mi hija con paciencia. Recomendable.', moderacion: null, mensajeOperador: null },
+];
+
 export function crearEstadoInicial() {
   return {
-    version: 2,
+    version: 3,
     ahora: 0,
     pacienteActual: 'pac1',
     profesionalActual: 'ruiz',
@@ -105,19 +122,7 @@ export function crearEstadoInicial() {
       { id: 'rep2', profId: 'gomez', obraSocial: 'OSDE', pacienteId: 'pac3', hora: -48 },
       { id: 'rep3', profId: 'gomez', obraSocial: 'OSDE', pacienteId: 'pac4', hora: -24 },
     ],
-    resenas: [
-      { id: 'res1', profId: 'ruiz', pacienteId: 'pac9', puntaje: 5, hora: -336, estado: 'publicada',
-        texto: 'Muy clara y puntual. Me ayudó a ordenar el tratamiento desde la primera consulta.', moderacion: null, mensajeOperador: null,
-        respuesta: { texto: 'Gracias por tu comentario, me alegra que te haya servido.', hora: -330 } },
-      { id: 'res2', profId: 'ruiz', pacienteId: 'pac6', puntaje: 4, hora: -190, estado: 'publicada',
-        texto: 'Escucha con atención y explica bien cada paso. Los turnos a veces se demoran unos minutos.', moderacion: null, mensajeOperador: null },
-      { id: 'res3', profId: 'ruiz', pacienteId: 'pac7', puntaje: 5, hora: -70, estado: 'publicada',
-        texto: 'Me sentí cómodo desde la primera sesión. Muy recomendable.', moderacion: null, mensajeOperador: null },
-      { id: 'res4', profId: 'herrera', pacienteId: 'pac1', puntaje: 5, hora: -120, estado: 'publicada',
-        texto: 'Cálido y profesional. Las sesiones online funcionan muy bien.', moderacion: null, mensajeOperador: null },
-      { id: 'res5', profId: 'paez', pacienteId: 'pac1', puntaje: 4, hora: -400, estado: 'publicada',
-        texto: 'Atendió a mi hija con paciencia. Recomendable.', moderacion: null, mensajeOperador: null },
-    ],
+    resenas: [...structuredClone(RESENAS_EXPLICITAS), ...crearResenasSemilla(PROFESIONALES, RESENAS_EXPLICITAS)],
     alertas: [],
     casos: [
       { id: 'caso1', tipo: 'disputa', estado: 'abierto', etapa: 'cola_operador', profId: 'gomez', obraSocial: 'OSDE',
