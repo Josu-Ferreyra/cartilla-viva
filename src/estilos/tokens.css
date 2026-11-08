@@ -1,0 +1,25 @@
+:root {
+  --cv-fuente: Inter, system-ui, -apple-system, sans-serif;
+  --cv-fondo: #F8F8F5;
+  --cv-superficie: #FFFFFF;
+  --cv-superficie-suave: #EFEEE9;
+  --cv-linea: #EFEEE9;
+  --cv-tinta: #1F2430;
+  --cv-tinta-2: #3A404C;
+  --cv-tenue: #5B6270;
+  --cv-enlace: #1E5A48;
+  --cv-enlace-hover: #123A2F;
+
+  --menta-fondo: #E4F2EC;   --menta-fuerte: #CBE6DA;  --menta-texto: #1E5A48;  --menta-texto-fuerte: #173B33; --menta-punto: #9FD3BE;
+  --manteca-fondo: #FBF1DC; --manteca-texto: #7A4A0E; --manteca-texto-fuerte: #6B3F0A; --manteca-punto: #F2CE84;
+  --durazno-fondo: #FDE9DE; --durazno-texto: #8A3E14; --durazno-texto-fuerte: #6E300E; --durazno-punto: #F3AE8C;
+  --rosa-fondo: #FBE7EA;    --rosa-texto: #8A2338;    --rosa-texto-fuerte: #7A1F33;    --rosa-punto: #EFA3B1;
+  --lavanda-fondo: #EDEBFA; --lavanda-texto: #3F3A78; --lavanda-texto-fuerte: #2F2A63;
+  --cielo-fondo: #E6F0FA;   --cielo-texto: #234A72;
+
+  --radio-boton: 20px;
+  --radio-tarjeta: 22px;
+  --radio-panel: 26px;
+  --radio-campo: 18px;
+  --sombra: 0 1px 2px rgba(31,36,48,.04), 0 8px 24px rgba(31,36,48,.04);
+}
