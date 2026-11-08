@@ -1,4 +1,4 @@
-// Prueba de ~20 reseñas que pide la Entrega 4. Sin funciones del navegador: lo usa también el script de Node.
+// Prueba de ~20 reseñas (más publicidad y temas ajenos) que pide la Entrega 4. Sin funciones del navegador: lo usa también el script de Node.
 // Mezcla críticas duras pero válidas, insultos, nombres de empleados, teléfonos, ironía, abreviaturas y spam.
 // Hay casos que las reglas fijas no detectan a propósito (DNI con puntos, insultos fuera de la lista,
 // datos de salud de terceros): sirven para mostrar dónde aporta la IA.
@@ -23,4 +23,7 @@ export const CASOS = [
   { id: 'c18', texto: 'Mi vecina Graciela tiene depresión y la atiende ella, por eso fui. Muy buena.', esperado: 'retener' },
   { id: 'c19', texto: 'La enfermera Lucía me puso mal la vacuna y me dolió una semana.', esperado: 'retener' },
   { id: 'c20', texto: 'Atención correcta, nada especial. Tardó casi un mes en mandarme el informe.', esperado: 'publicar' },
+  { id: 'c21', texto: 'Aprovechá 2x1 en cremas importadas, escribime por privado y te paso el catálogo.', esperado: 'retener' },
+  { id: 'c22', texto: 'Qué papelón lo de anoche, el árbitro vendido. Vamos Lepra carajo.', esperado: 'retener' },
+  { id: 'c23', texto: 'Muy buena atención.', esperado: 'publicar' },
 ];
