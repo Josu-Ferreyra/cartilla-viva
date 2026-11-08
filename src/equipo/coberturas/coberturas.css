@@ -1,1 +1,60 @@
 /* Área 03 · prefijo cob- */
+
+/* Profesional */
+.cob-pregunta { margin: 0; font-size: 32px; line-height: 1.2; font-weight: 600; letter-spacing: -.6px; }
+.cob-evidencia { list-style: none; margin: 0; padding: 0; gap: 14px; font-size: 16px; line-height: 1.5; color: var(--cv-tinta-2); }
+.cob-evidencia li { display: flex; align-items: baseline; gap: 12px; }
+.cob-evidencia .cv-punto { transform: translateY(-1px); }
+.cob-nota { margin: 0; line-height: 1.6; }
+.cob-planes { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.cob-planes .cob-input { width: 220px; }
+.cob-input { min-height: 44px; padding: 0 16px; border: 0; border-radius: 14px; background: var(--cv-fondo); font-size: 16px; }
+.cob-lateral-tarjeta { background: var(--cv-superficie); border-radius: var(--radio-tarjeta); padding: 8px 28px; }
+.cob-fila-perfil { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; font-size: 16px; }
+
+/* Detalles del operador */
+.cob-evidencia-grilla { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.cob-contradiccion { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.cob-dato { border-radius: 20px; padding: 24px; background: var(--cv-fondo); }
+.cob-bloque { border-radius: 20px; padding: 24px 28px; }
+.cob-bloque--menta { background: var(--menta-fondo); }
+.cob-bloque--durazno { background: var(--durazno-fondo); }
+.cob-rotulo { margin: 0; font-size: 13px; color: var(--cv-tenue); }
+.cob-valor { margin: 8px 0 0; font-size: 19px; font-weight: 600; }
+.cob-detalle { margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: var(--cv-tenue); }
+.cob-bloque--menta .cob-rotulo { color: var(--menta-texto); }
+.cob-bloque--menta .cob-valor { color: var(--menta-texto-fuerte); }
+.cob-bloque--menta .cob-detalle { color: var(--menta-texto); }
+.cob-bloque--durazno .cob-rotulo { color: var(--durazno-texto); }
+.cob-bloque--durazno .cob-valor { color: var(--durazno-texto-fuerte); }
+.cob-bloque--durazno .cob-detalle { color: var(--durazno-texto); }
+.cob-barra { height: 8px; border-radius: 999px; background: var(--cv-superficie-suave); overflow: hidden; }
+.cob-barra__relleno { height: 100%; border-radius: 999px; background: var(--manteca-punto); }
+.cob-campo-nota { display: flex; flex-direction: column; gap: 10px; }
+
+.cob-decision { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.cob-decision legend { padding: 0; margin-bottom: 12px; }
+.cob-opcion { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-height: 52px; padding: 0 20px; border-radius: 16px; font-size: 16px; background: var(--cv-fondo); cursor: pointer; }
+.cob-opcion--activa { background: var(--menta-fondo); }
+.cob-opcion input[type="radio"] { accent-color: #2F7A64; width: 18px; height: 18px; margin: 0; }
+.cob-opcion .cob-input { width: 96px; min-height: 36px; background: var(--cv-superficie); }
+
+/* Panel del presentador */
+.cob-presentador { position: fixed; right: 24px; bottom: 24px; z-index: 50; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.cob-presentador__boton { background: var(--cv-tinta); color: #fff; }
+.cob-presentador__boton:hover { background: var(--cv-tinta-2); color: #fff; }
+.cob-presentador__panel { width: 320px; max-width: calc(100vw - 48px); max-height: calc(100vh - 96px); overflow-y: auto; background: var(--cv-superficie); border-radius: 22px; padding: 24px; box-shadow: var(--sombra); display: flex; flex-direction: column; gap: 20px; }
+.cob-presentador__cabecera { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cob-presentador__seccion { display: flex; flex-direction: column; gap: 10px; }
+.cob-presentador__links { display: flex; flex-direction: column; gap: 8px; font-size: 15px; }
+.cob-presentador__acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.cob-presentador__acciones .cv-boton { flex: 0 0 auto; }
+.cob-presentador__reiniciar--confirmar { background: var(--durazno-fondo); color: var(--durazno-texto-fuerte); }
+
+@media (max-width: 720px) {
+  .cob-evidencia-grilla,
+  .cob-contradiccion { grid-template-columns: minmax(0, 1fr); }
+  .cob-pregunta { font-size: 26px; }
+  .cob-presentador { right: 16px; bottom: 16px; }
+  .cob-presentador__panel { max-width: calc(100vw - 32px); }
+}
