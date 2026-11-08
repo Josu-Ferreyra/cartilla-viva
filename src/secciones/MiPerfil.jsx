@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Pagina from '../componentes/Pagina.jsx';
 import Chip from '../componentes/Chip.jsx';
+import Selector from '../componentes/Selector.jsx';
 import NoEncontrada from '../componentes/NoEncontrada.jsx';
 import { useApp, selProf, selPerfil, selAlertasPendientes } from '../core/store.jsx';
 import { ESTADO_COBERTURA, ESTADO_MATRICULA, enDias } from '../core/formato.js';
@@ -64,9 +65,7 @@ function Formulario({ perfil, profId }) {
       {campo('direccion', 'Dirección')}
       <div className="sec-campo">
         <label className="cv-etiqueta" htmlFor="perfil-modalidad">Modalidad</label>
-        <select id="perfil-modalidad" className="sec-select" value={borrador.modalidad} onChange={cambiar('modalidad')}>
-          {MODALIDADES.map((m) => <option key={m}>{m}</option>)}
-        </select>
+        <Selector id="perfil-modalidad" value={borrador.modalidad} opciones={MODALIDADES} onChange={(v) => setBorrador((b) => ({ ...b, modalidad: v }))} />
       </div>
       <div className="sec-campo">
         <label className="cv-etiqueta" htmlFor="perfil-bio">Presentación</label>

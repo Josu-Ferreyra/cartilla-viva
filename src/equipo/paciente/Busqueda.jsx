@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import Header from '../../componentes/Header.jsx';
 import Chip from '../../componentes/Chip.jsx';
 import Avatar from '../../componentes/Avatar.jsx';
+import Selector from '../../componentes/Selector.jsx';
 import { useApp } from '../../core/store.jsx';
 import { ESPECIALIDADES, COBERTURAS, ZONAS, BUSQUEDA_INICIAL } from '../../core/datos.js';
 import { ESTADO_COBERTURA, numero, iniciales } from '../../core/formato.js';
@@ -65,13 +66,12 @@ export default function Busqueda() {
           {CAMPOS.map((campo) => (
             <label key={campo.clave} className="pac-campo">
               <span className="pac-campo__rotulo">{campo.rotulo}</span>
-              <select
-                className="pac-campo__select"
+              <Selector
+                variante="barra"
                 value={borrador[campo.clave]}
-                onChange={(ev) => setBorrador({ ...borrador, [campo.clave]: ev.target.value })}
-              >
-                {campo.opciones.map((op) => <option key={op} value={op}>{op}</option>)}
-              </select>
+                opciones={campo.opciones}
+                onChange={(valor) => setBorrador((b) => ({ ...b, [campo.clave]: valor }))}
+              />
             </label>
           ))}
           <button type="submit" className="cv-boton cv-boton--primario">Buscar</button>
