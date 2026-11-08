@@ -1,0 +1,4 @@
+# El nombre del modelo de Gemini no es un secreto: aparece en .env.example y como valor por defecto en moderador.js.
+# Sin esto, el escaneo de secretos de Netlify hace fallar el build.
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "VITE_GEMINI_MODEL"
