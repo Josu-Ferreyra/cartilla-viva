@@ -1,0 +1,82 @@
+/* Secciones del menú · prefijo sec- */
+.sec-estrellas { color: #D9A441; letter-spacing: 2px; font-size: 16px; white-space: nowrap; }
+.sec-estrellas__vacias { color: #DAD8D0; }
+
+.sec-tarjeta { background: var(--cv-superficie); border-radius: var(--radio-tarjeta); padding: 28px 32px; }
+.sec-tarjeta--chica { padding: 20px 24px; }
+.sec-titulo-2 { margin: 0; font-size: 19px; font-weight: 600; }
+.sec-texto { margin: 0; font-size: 16px; line-height: 1.6; color: var(--cv-tinta-2); }
+.sec-cuerpo-aviso { margin-top: 32px; }
+.sec-vacio { padding: 48px 32px; text-align: center; }
+.sec-vacio .sec-texto { color: var(--cv-tenue); }
+
+/* Formularios */
+.sec-campo { display: flex; flex-direction: column; gap: 8px; }
+.sec-input, .sec-select, .sec-area { width: 100%; min-height: 48px; padding: 0 16px; border: 0; border-radius: 14px; background: var(--cv-fondo); font-size: 16px; color: var(--cv-tinta); }
+.sec-area { padding: 14px 16px; line-height: 1.55; resize: vertical; min-height: 110px; }
+.sec-input[aria-invalid="true"], .sec-area[aria-invalid="true"] { outline: 2px solid var(--rosa-punto); }
+.sec-error { margin: 0; font-size: 13px; color: var(--rosa-texto); }
+.sec-ayuda { margin: 0; font-size: 13px; color: var(--cv-tenue); }
+.sec-grilla-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.sec-interruptor { display: flex; align-items: center; gap: 12px; font-size: 16px; cursor: pointer; }
+.sec-interruptor input { width: 20px; height: 20px; accent-color: #2F7A64; margin: 0; }
+
+/* Filtros */
+.sec-filtros { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sec-filtro { border: 0; min-height: 40px; padding: 0 18px; border-radius: 999px; background: var(--cv-superficie); color: var(--cv-tinta-2); font-size: 14px; font-weight: 500; cursor: pointer; }
+.sec-filtro:hover { background: var(--cv-superficie-suave); }
+.sec-filtro[aria-pressed="true"] { background: var(--menta-fuerte); color: var(--menta-texto-fuerte); }
+.sec-buscar { max-width: 280px; margin-left: auto; background: var(--cv-superficie); }
+
+/* Reseñas */
+.sec-resena { display: flex; flex-direction: column; gap: 14px; }
+.sec-resena__cabecera { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.sec-resena__nombre { font-weight: 600; font-size: 16px; color: var(--cv-tinta); text-decoration: none; }
+.sec-respuesta { background: var(--cv-fondo); border-radius: 16px; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px; }
+.sec-respuesta p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--cv-tinta-2); }
+.sec-puntaje { font-size: 56px; font-weight: 600; letter-spacing: -1.5px; line-height: 1; }
+
+/* Tablas en filas */
+.sec-filas { display: flex; flex-direction: column; }
+.sec-fila { display: grid; align-items: center; gap: 20px; padding: 20px 28px; }
+.sec-fila + .sec-fila { border-top: 1px solid var(--cv-linea); }
+.sec-fila--matricula { grid-template-columns: minmax(180px, 1.3fr) minmax(150px, 1fr) minmax(110px, .7fr) auto minmax(180px, auto); }
+.sec-fila--cabecera { padding-top: 14px; padding-bottom: 14px; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .8px; color: var(--cv-tenue); }
+.sec-principal { font-weight: 600; font-size: 16px; }
+.sec-secundario { font-size: 14px; color: var(--cv-tenue); margin-top: 2px; }
+.sec-acciones { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+
+.sec-resumen { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.sec-resumen__n { margin: 8px 0 0; font-size: 30px; font-weight: 600; letter-spacing: -.5px; }
+
+/* Avisos */
+.sec-aviso-item { display: flex; flex-direction: column; gap: 12px; }
+.sec-aviso-item__texto { font-size: 17px; line-height: 1.5; color: var(--cv-tinta-2); margin: 0; }
+
+/* Reglas */
+.sec-regla { display: flex; flex-direction: column; gap: 6px; }
+.sec-regla__valor { font-size: 15px; font-weight: 600; color: var(--menta-texto); }
+.sec-numero { width: 96px; }
+
+/* Registro */
+.sec-registro { list-style: none; margin: 0; padding: 0; }
+.sec-registro li { display: grid; grid-template-columns: 84px 64px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 14px 28px; }
+.sec-registro li + li { border-top: 1px solid var(--cv-linea); }
+.sec-registro a { color: inherit; text-decoration: none; }
+.sec-registro a:hover { color: var(--cv-enlace); }
+.sec-registro__cuerpo { display: flex; flex-direction: column; gap: 2px; }
+.sec-registro__ruta { font-size: 14px; color: var(--cv-tinta-2); }
+.sec-registro__texto { font-size: 15px; color: var(--cv-tinta-2); }
+
+@media (max-width: 900px) {
+  .sec-fila--matricula { grid-template-columns: minmax(0, 1fr) auto; }
+  .sec-fila--cabecera { display: none; }
+  .sec-acciones { justify-content: flex-start; grid-column: 1 / -1; }
+  .sec-resumen { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .sec-grilla-2 { grid-template-columns: minmax(0, 1fr); }
+  .sec-registro li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .sec-buscar { max-width: none; margin-left: 0; width: 100%; }
+  .sec-tarjeta { padding: 22px; }
+}
