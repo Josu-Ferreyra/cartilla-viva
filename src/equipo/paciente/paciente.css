@@ -50,5 +50,12 @@
 .pac-resena { border-top: 1px solid var(--cv-linea); padding-top: 24px; }
 .pac-resena__texto { margin: 0; font-size: 15px; line-height: 1.6; color: var(--cv-tinta-2); }
 .pac-resena__meta { margin: 8px 0 0; font-size: 13px; }
+.pac-resenas-lista { margin-top: 32px; max-width: 760px; }
+.pac-resena-completa { display: flex; flex-direction: column; gap: 12px; padding: 28px 32px; }
+.pac-resena__respuesta { background: var(--cv-superficie-suave); border-radius: 16px; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px; }
+.pac-filtros { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pac-filtro { border: 0; min-height: 40px; padding: 0 18px; border-radius: 999px; background: var(--cv-superficie); color: var(--cv-tinta-2); font-size: 14px; font-weight: 500; cursor: pointer; }
+.pac-filtro:hover { background: var(--cv-superficie-suave); }
+.pac-filtro[aria-pressed="true"] { background: var(--menta-fuerte); color: var(--menta-texto-fuerte); }
 .pac-aviso-resena { padding: 24px 28px; }
 .pac-aviso-resena a { color: inherit; }

@@ -67,6 +67,9 @@ export function numero(n) {
   return String(n).replace('.', ',');
 }
 
+// Puntaje promedio con coma ('4,6'); '–' si todavía no hay reseñas.
+export const puntaje = (rating) => (rating == null ? '–' : numero(rating));
+
 // 'la Dra. Marina Ruiz' | 'el Lic. Tomás Herrera' ('la' si el título termina en 'a')
 export function conArticulo(prof, corto = false) {
   const articulo = prof.titulo.endsWith('a') ? 'la' : 'el';

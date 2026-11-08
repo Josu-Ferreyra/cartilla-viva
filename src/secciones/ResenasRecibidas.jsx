@@ -3,8 +3,8 @@ import Pagina from '../componentes/Pagina.jsx';
 import Chip from '../componentes/Chip.jsx';
 import Estrellas from '../componentes/Estrellas.jsx';
 import NoEncontrada from '../componentes/NoEncontrada.jsx';
-import { useApp, selProf, selResenasPublicadas } from '../core/store.jsx';
-import { haceTiempo, numero } from '../core/formato.js';
+import { useApp, selProf, selResenasPublicadas, selResumenResenas } from '../core/store.jsx';
+import { haceTiempo, puntaje } from '../core/formato.js';
 import './secciones.css';
 
 const FILTROS = [
@@ -79,6 +79,7 @@ export default function ResenasRecibidas() {
   if (!prof) return <NoEncontrada />;
 
   const publicadas = selResenasPublicadas(estado, prof.id);
+  const resumen = selResumenResenas(estado, prof.id);
   const enRevision = estado.resenas.filter((r) => r.profId === prof.id && r.estado === 'retenida').length;
   const sinResponder = publicadas.filter((r) => !r.respuesta).length;
   const lista = publicadas.filter((r) =>
@@ -123,8 +124,8 @@ export default function ResenasRecibidas() {
           <h2 className="cv-eyebrow">Resumen</h2>
           <div className="sec-tarjeta cv-pila cv-gap-16">
             <div className="cv-fila cv-gap-12" style={{ alignItems: 'baseline' }}>
-              <span className="sec-puntaje">{numero(prof.rating)}</span>
-              <span className="cv-meta">de 5 · {prof.cantResenas} reseñas</span>
+              <span className="sec-puntaje">{puntaje(resumen.rating)}</span>
+              <span className="cv-meta">de 5 · {resumen.cantidad} reseñas</span>
             </div>
             <div className="cv-fila cv-gap-8">
               <Chip tono="menta">{publicadas.length} publicadas</Chip>

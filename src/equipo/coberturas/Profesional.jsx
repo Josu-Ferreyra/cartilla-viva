@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Header from '../../componentes/Header.jsx';
 import Chip from '../../componentes/Chip.jsx';
 import NoEncontrada from '../../componentes/NoEncontrada.jsx';
-import { useApp, selProf, selCaso, selAlertasPendientes } from '../../core/store.jsx';
-import { ESTADO_COBERTURA, haceTiempo, diaDeSiete, numero } from '../../core/formato.js';
+import { useApp, selProf, selCaso, selAlertasPendientes, selResumenResenas } from '../../core/store.jsx';
+import { ESTADO_COBERTURA, haceTiempo, diaDeSiete, puntaje } from '../../core/formato.js';
 import { reportesDe, pacientesDistintos, primerNombre, separarPlanes, unirPlanes } from './utilidades.js';
 import './coberturas.css';
 
@@ -96,7 +96,7 @@ function TarjetaAlerta({ alerta, onResponder }) {
   );
 }
 
-function Resumen({ prof }) {
+function Resumen({ prof, resumen }) {
   return (
     <aside className="cv-col-lateral cv-pila cv-gap-16" aria-label="Tu perfil">
       <h2 className="cv-eyebrow">Tu perfil</h2>
@@ -113,7 +113,7 @@ function Resumen({ prof }) {
         ))}
         <div className="cob-fila-perfil">
           <span>Reseñas</span>
-          <span style={{ fontWeight: 600 }}>{numero(prof.rating)} · {prof.cantResenas}</span>
+          <span style={{ fontWeight: 600 }}>{puntaje(resumen.rating)} · {resumen.cantidad}</span>
         </div>
       </div>
     </aside>
@@ -155,7 +155,7 @@ export default function Profesional({ profId }) {
               </div>
             )}
           </div>
-          <Resumen prof={prof} />
+          <Resumen prof={prof} resumen={selResumenResenas(estado, profId)} />
         </div>
       </main>
     </div>

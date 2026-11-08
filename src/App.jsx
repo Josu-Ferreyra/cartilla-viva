@@ -2,6 +2,7 @@ import { useRuta } from './core/ruta.js';
 import { useApp } from './core/store.jsx';
 import Busqueda from './equipo/paciente/Busqueda.jsx';
 import Perfil from './equipo/paciente/Perfil.jsx';
+import ResenasProfesional from './equipo/paciente/ResenasProfesional.jsx';
 import Resena from './equipo/moderacion/Resena.jsx';
 import Profesional from './equipo/coberturas/Profesional.jsx';
 import PanelPresentador from './equipo/coberturas/PanelPresentador.jsx';
@@ -23,6 +24,7 @@ export default function App() {
     case undefined: pagina = <Busqueda />; break;
     case 'perfil': pagina = <Perfil profId={id} />; break;
     case 'resena': pagina = <Resena profId={id} />; break;
+    case 'resenas': pagina = <ResenasProfesional key={id} profId={id} />; break;
     case 'profesional': pagina = <Profesional profId={id ?? estado.profesionalActual} />; break;
     case 'operador': pagina = <OperadorPage casoId={id} />; break;
     case 'mis-resenas': pagina = <MisResenas />; break;

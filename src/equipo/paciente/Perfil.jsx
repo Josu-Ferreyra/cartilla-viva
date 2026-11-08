@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Header from '../../componentes/Header.jsx';
 import Chip from '../../componentes/Chip.jsx';
 import Avatar from '../../componentes/Avatar.jsx';
-import { useApp, selProf, selResenasPublicadas, selUltimaResenaDelPaciente, selReportesDelPaciente } from '../../core/store.jsx';
-import { ESTADO_COBERTURA, haceTiempo, numero, iniciales } from '../../core/formato.js';
+import { useApp, selProf, selResenasPublicadas, selResumenResenas, selUltimaResenaDelPaciente, selReportesDelPaciente } from '../../core/store.jsx';
+import { ESTADO_COBERTURA, haceTiempo, puntaje, iniciales } from '../../core/formato.js';
 import { textoChipPerfil, esFemenino, pacientesQueReportaron } from './textos.js';
 import './paciente.css';
 
@@ -140,7 +140,9 @@ export default function Perfil({ profId }) {
   }
 
   const conAviso = prof.coberturas.filter((c) => c.estado === 'sin_confirmar' || c.estado === 'en_disputa');
-  const publicadas = selResenasPublicadas(estado, prof.id).slice(0, 2);
+  const todasPublicadas = selResenasPublicadas(estado, prof.id);
+  const publicadas = todasPublicadas.slice(0, 2);
+  const resumen = selResumenResenas(estado, prof.id);
 
   return (
     <div className="cv-pagina">
@@ -185,8 +187,8 @@ export default function Perfil({ profId }) {
           <aside className="cv-col-lateral cv-pila cv-gap-16" aria-label="Reseñas">
             <div className="cv-tarjeta pac-resenas cv-pila cv-gap-24">
               <div className="cv-fila cv-gap-12">
-                <span className="pac-puntaje-grande">{numero(prof.rating)}</span>
-                <span className="cv-meta">{prof.cantResenas} reseñas moderadas</span>
+                <span className="pac-puntaje-grande">{puntaje(resumen.rating)}</span>
+                <span className="cv-meta">{resumen.cantidad} {resumen.cantidad === 1 ? 'reseña moderada' : 'reseñas moderadas'}</span>
               </div>
               {publicadas.map((r) => (
                 <div key={r.id} className="pac-resena">
@@ -194,6 +196,9 @@ export default function Perfil({ profId }) {
                   <p className="cv-meta pac-resena__meta">Paciente · {haceTiempo(r.hora, estado.ahora)}</p>
                 </div>
               ))}
+              {todasPublicadas.length > 0 && (
+                <a className="pac-enlace-fuerte" href={`#/resenas/${prof.id}`}>Ver todas las reseñas y filtrar por estrellas →</a>
+              )}
               <a className="pac-enlace-fuerte" href={`#/resena/${prof.id}`}>Escribir una reseña →</a>
             </div>
             <EstadoResenaPropia prof={prof} estado={estado} />

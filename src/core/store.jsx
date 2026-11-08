@@ -10,7 +10,7 @@ function cargar() {
     const crudo = window.localStorage.getItem(CLAVE);
     if (crudo) {
       const e = JSON.parse(crudo);
-      if (e && e.version === 2 && Array.isArray(e.casos) && Array.isArray(e.profesionales)) return e;
+      if (e && e.version === 3 && Array.isArray(e.casos) && Array.isArray(e.profesionales)) return e;
     }
   } catch { /* JSON inválido o localStorage no disponible: arranca de cero */ }
   return crearEstadoInicial();
@@ -92,6 +92,12 @@ export const selAlertasPendientes = (estado, profId) =>
   estado.alertas.filter((a) => a.profId === profId && a.estado === 'pendiente');
 export const selResenasPublicadas = (estado, profId) =>
   estado.resenas.filter((r) => r.profId === profId && r.estado === 'publicada').reverse().sort((a, b) => b.hora - a.hora);
+// Puntaje (un decimal) y cantidad de reseñas publicadas: única fuente para buscador, perfil y listados.
+export const selResumenResenas = (estado, profId) => {
+  const publicadas = estado.resenas.filter((r) => r.profId === profId && r.estado === 'publicada');
+  const suma = publicadas.reduce((t, r) => t + r.puntaje, 0);
+  return { cantidad: publicadas.length, rating: publicadas.length ? Math.round((suma / publicadas.length) * 10) / 10 : null };
+};
 // reverse() antes de sort(): con la misma hora gana la que se creó última
 export const selUltimaResenaDelPaciente = (estado, profId) =>
   estado.resenas
