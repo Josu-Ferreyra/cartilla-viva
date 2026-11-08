@@ -1,11 +1,11 @@
-import { crearEstadoInicial } from './datos.js';
+import { crearEstadoInicial, REGLAS_INICIALES } from './datos.js';
 
 // Cada regla recibe el estado y un payload y devuelve un estado nuevo.
 // Trabajan sobre una copia (structuredClone), así que el estado original nunca se muta.
 
 const copia = (e) => structuredClone(e);
 
-function nuevoId(s, prefijo) {
+export function nuevoId(s, prefijo) {
   const id = `${prefijo}${s.siguienteId}`;
   s.siguienteId += 1;
   return id;
@@ -13,7 +13,7 @@ function nuevoId(s, prefijo) {
 export const getProf = (e, id) => e.profesionales.find((p) => p.id === id);
 export const getCob = (prof, obraSocial) => prof?.coberturas.find((c) => c.obraSocial === obraSocial);
 
-function agregarMensaje(caso, { n, de, a, tipo, texto }, hora) {
+export function agregarMensaje(caso, { n, de, a, tipo, texto }, hora) {
   caso.registro.push({ n: n ?? String(caso.registro.length + 1), de, a, tipo, texto, hora });
 }
 
@@ -50,6 +50,7 @@ function abrirSinConfirmar(s, prof, cob, conReporte) {
 
 // A1 y A3 no coinciden: la cartilla incluye al profesional pero hay varios reportes en contra.
 function abrirDisputa(s, prof, cob, cantReportes) {
+  const ventanaDias = s.reglas?.ventanaDias ?? REGLAS_INICIALES.ventanaDias;
   const ahora = s.ahora;
   const os = cob.obraSocial;
   cob.estado = 'en_disputa';
@@ -61,7 +62,7 @@ function abrirDisputa(s, prof, cob, cantReportes) {
     creado: ahora, enColaDesde: ahora, decision: null, registro: [],
   };
   agregarMensaje(caso, { de: 'A3', a: 'A1', tipo: 'informar', texto: `${os} verificada en la cartilla (vía base).` }, ahora);
-  agregarMensaje(caso, { de: 'A1', a: 'A3', tipo: 'informar', texto: `${cantReportes} reportes «no atiende mi cobertura» en 7 días (vía base).` }, ahora);
+  agregarMensaje(caso, { de: 'A1', a: 'A3', tipo: 'informar', texto: `${cantReportes} reportes «no atiende mi cobertura» en ${ventanaDias} días (vía base).` }, ahora);
   agregarMensaje(caso, { de: 'A3', a: 'A1', tipo: 'informar', texto: `${os} pasa a «en disputa», con aviso.` }, ahora);
   agregarMensaje(caso, { de: 'A3', a: 'Operador', tipo: 'proponer', texto: `Sacar ${os} del perfil (vía cola).` }, ahora);
   s.casos.push(caso);
@@ -82,12 +83,13 @@ export function reportarNoAtiende(e, { profId, obraSocial }) {
     return s;
   }
 
+  const { umbralReportes, ventanaDias } = { ...REGLAS_INICIALES, ...s.reglas };
   const pacientes = new Set(
     s.reportes
-      .filter((r) => r.profId === profId && r.obraSocial === obraSocial && r.hora >= s.ahora - 168)
+      .filter((r) => r.profId === profId && r.obraSocial === obraSocial && r.hora >= s.ahora - ventanaDias * 24)
       .map((r) => r.pacienteId),
   );
-  if (pacientes.size >= 3 && cob.estado === 'verificada') abrirDisputa(s, prof, cob, pacientes.size);
+  if (pacientes.size >= umbralReportes && cob.estado === 'verificada') abrirDisputa(s, prof, cob, pacientes.size);
   return s;
 }
 

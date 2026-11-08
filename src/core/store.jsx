@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
-import { crearEstadoInicial } from './datos.js';
+import { crearEstadoInicial, PERFIL_VACIO } from './datos.js';
 import * as reglas from './reglas.js';
+import * as gestion from './gestion.js';
 
 const CLAVE = 'cartilla-viva-v1';
 
@@ -9,7 +10,7 @@ function cargar() {
     const crudo = window.localStorage.getItem(CLAVE);
     if (crudo) {
       const e = JSON.parse(crudo);
-      if (e && e.version === 1 && Array.isArray(e.casos) && Array.isArray(e.profesionales)) return e;
+      if (e && e.version === 2 && Array.isArray(e.casos) && Array.isArray(e.profesionales)) return e;
     }
   } catch { /* JSON inválido o localStorage no disponible: arranca de cero */ }
   return crearEstadoInicial();
@@ -26,6 +27,13 @@ function reducer(estado, accion) {
     case 'resolverDisputa': return reglas.resolverDisputa(estado, p);
     case 'enviarResena': return reglas.enviarResena(estado, p);
     case 'resolverResena': return reglas.resolverResena(estado, p);
+    case 'actualizarPerfil': return gestion.actualizarPerfil(estado, p);
+    case 'responderResenaRecibida': return gestion.responderResenaRecibida(estado, p);
+    case 'eliminarResena': return gestion.eliminarResena(estado, p);
+    case 'actualizarMatricula': return gestion.actualizarMatricula(estado, p);
+    case 'resolverAnuncio': return gestion.resolverAnuncio(estado, p);
+    case 'crearAnuncio': return gestion.crearAnuncio(estado, p);
+    case 'actualizarReglas': return gestion.actualizarReglas(estado, p);
     case 'reiniciar': return reglas.reiniciar();
     default: return estado;
   }
@@ -45,6 +53,13 @@ export function AppProvider({ children }) {
     resolverDisputa: (p) => dispatch({ tipo: 'resolverDisputa', payload: p }),
     enviarResena: (p) => dispatch({ tipo: 'enviarResena', payload: p }),
     resolverResena: (p) => dispatch({ tipo: 'resolverResena', payload: p }),
+    actualizarPerfil: (p) => dispatch({ tipo: 'actualizarPerfil', payload: p }),
+    responderResenaRecibida: (p) => dispatch({ tipo: 'responderResenaRecibida', payload: p }),
+    eliminarResena: (p) => dispatch({ tipo: 'eliminarResena', payload: p }),
+    actualizarMatricula: (p) => dispatch({ tipo: 'actualizarMatricula', payload: p }),
+    resolverAnuncio: (p) => dispatch({ tipo: 'resolverAnuncio', payload: p }),
+    crearAnuncio: (p) => dispatch({ tipo: 'crearAnuncio', payload: p }),
+    actualizarReglas: (p) => dispatch({ tipo: 'actualizarReglas', payload: p }),
     reiniciar: () => dispatch({ tipo: 'reiniciar' }),
   }), [dispatch]);
 
@@ -85,3 +100,9 @@ export const selUltimaResenaDelPaciente = (estado, profId) =>
     .sort((a, b) => b.hora - a.hora)[0] ?? null;
 export const selReportesDelPaciente = (estado, profId) =>
   estado.reportes.filter((r) => r.profId === profId && r.pacienteId === estado.pacienteActual);
+export const selPerfil = (estado, profId) => ({ ...PERFIL_VACIO, ...estado.perfiles[profId] });
+export const selResenasDelPaciente = (estado) =>
+  estado.resenas
+    .filter((r) => r.pacienteId === estado.pacienteActual)
+    .reverse()
+    .sort((a, b) => b.hora - a.hora);

@@ -10,27 +10,26 @@ const LOGO = (
 const INICIO = { paciente: '#/', profesional: '#/profesional', operador: '#/operador' };
 const ROL = { paciente: null, profesional: 'Profesionales', operador: 'Operador' };
 
-// Los ítems con href null no tienen pantalla en la demo: se muestran pero no navegan.
 function itemsNav(variante, nAlertas, nAbiertos) {
   switch (variante) {
     case 'profesional':
       return [
         { clave: 'Alertas', texto: `Alertas (${nAlertas})`, href: '#/profesional' },
-        { clave: 'Mi perfil', texto: 'Mi perfil', href: null },
-        { clave: 'Reseñas', texto: 'Reseñas', href: null },
+        { clave: 'Mi perfil', texto: 'Mi perfil', href: '#/mi-perfil' },
+        { clave: 'Reseñas', texto: 'Reseñas', href: '#/resenas-recibidas' },
       ];
     case 'operador':
       return [
         { clave: 'Cola', texto: `Cola (${nAbiertos} abiertos)`, href: '#/operador' },
-        { clave: 'Matrículas', texto: 'Matrículas', href: null },
-        { clave: 'Avisos', texto: 'Avisos', href: null },
-        { clave: 'Reglas', texto: 'Reglas', href: null },
-        { clave: 'Registro', texto: 'Registro', href: null },
+        { clave: 'Matrículas', texto: 'Matrículas', href: '#/matriculas' },
+        { clave: 'Avisos', texto: 'Avisos', href: '#/avisos' },
+        { clave: 'Reglas', texto: 'Reglas', href: '#/reglas' },
+        { clave: 'Registro', texto: 'Registro', href: '#/registro' },
       ];
     default:
       return [
         { clave: 'Buscar', texto: 'Buscar', href: '#/' },
-        { clave: 'Mis reseñas', texto: 'Mis reseñas', href: null },
+        { clave: 'Mis reseñas', texto: 'Mis reseñas', href: '#/mis-resenas' },
       ];
   }
 }
@@ -55,9 +54,8 @@ export default function Header({ variante, volver, activo }) {
           {itemsNav(variante, nAlertas, nAbiertos).map((it) => (
             <a
               key={it.clave}
-              href={it.href ?? '#'}
+              href={it.href}
               aria-current={it.clave === activo ? 'page' : undefined}
-              onClick={it.href ? undefined : (ev) => ev.preventDefault()}
             >
               {it.texto}
             </a>

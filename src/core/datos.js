@@ -45,19 +45,61 @@ export const CARTILLAS = {
   OSDE: ['ruiz','molina','rossi','gomez','paez'],
 };
 
+// estado: 'pendiente' | 'aprobado' | 'rechazado'. `aprobado` se mantiene en sincronía para quien solo lee ese campo.
+const A = (id, titulo, texto, especialidad, zona, estado, hora, motivo = null) =>
+  ({ id, titulo, texto, especialidad, zona, estado, aprobado: estado === 'aprobado', hora, motivo });
+
 export const ANUNCIOS = [
-  { id: 'a1', titulo: 'Centro Andino de Salud Mental', texto: 'Turnos de psicología en Godoy Cruz.', especialidad: 'Psicología', zona: 'Godoy Cruz', aprobado: true },
+  A('a1', 'Centro Andino de Salud Mental', 'Turnos de psicología en Godoy Cruz.', 'Psicología', 'Godoy Cruz', 'aprobado', -400),
+  A('a2', 'Nutrición Integral Mendoza', 'Primera consulta de seguimiento sin cargo para afiliados.', 'Nutrición', 'Guaymallén', 'pendiente', -30),
+  A('a3', 'Terapia exprés', 'Curamos la ansiedad en 3 sesiones, resultado garantizado.', 'Psicología', 'Ciudad de Mendoza', 'pendiente', -12),
+  A('a4', 'Pediatría a domicilio', 'Visitas en el día para todo Gran Mendoza.', 'Pediatría', 'Godoy Cruz', 'rechazado', -200,
+    'No se puede verificar el servicio a domicilio.'),
 ];
+
+// Datos de contacto y de consultorio que edita cada profesional en «Mi perfil».
+const perfil = (telefono, direccion, honorario, modalidad, bio, aceptaNuevos = true) =>
+  ({ telefono, direccion, honorario, modalidad, bio, aceptaNuevos });
+
+export const PERFILES = {
+  ruiz: perfil('261 555-0142', 'San Martín 1240, Godoy Cruz', '28000', 'Presencial y online',
+    'Psicóloga clínica. Trabajo con adultos en ansiedad y duelo, con un enfoque cognitivo-conductual.'),
+  gomez: perfil('261 555-0177', 'Ruta 40 km 3, Luján de Cuyo', '32000', 'Presencial',
+    'Médica clínica con foco en seguimiento de enfermedades crónicas.'),
+};
+export const PERFIL_VACIO = perfil('', '', '', 'Presencial', '');
+
+// estado: 'vigente' | 'por_vencer' | 'observada' | 'suspendida'. `vence` y `revisadaEn` están en horas de la demo.
+const COLEGIO = { 'Psicología': 'Colegio de Psicólogos', 'Clínica médica': 'Colegio Médico', 'Pediatría': 'Colegio Médico', 'Nutrición': 'Colegio de Nutricionistas' };
+const ESTADO_MATRICULA_INICIAL = { ferrari: 'por_vencer', gomez: 'observada' };
+
+export const MATRICULAS = Object.fromEntries(PROFESIONALES.map((p, i) => {
+  const estado = ESTADO_MATRICULA_INICIAL[p.id] ?? 'vigente';
+  return [p.id, {
+    numero: `MP ${3200 + i * 173}`,
+    colegio: COLEGIO[p.especialidad],
+    estado,
+    vence: estado === 'por_vencer' ? 24 * 20 : 24 * (400 + i * 15),
+    revisadaEn: -24 * (3 + i),
+  }];
+}));
+
+// Umbrales que usa A1/A3 para abrir una disputa (los lee reglas.reportarNoAtiende).
+export const REGLAS_INICIALES = { umbralReportes: 3, ventanaDias: 7 };
 
 export function crearEstadoInicial() {
   return {
-    version: 1,
+    version: 2,
     ahora: 0,
     pacienteActual: 'pac1',
     profesionalActual: 'ruiz',
     profesionales: structuredClone(PROFESIONALES),
     cartillas: structuredClone(CARTILLAS),
     anuncios: structuredClone(ANUNCIOS),
+    perfiles: structuredClone(PERFILES),
+    matriculas: structuredClone(MATRICULAS),
+    reglas: { ...REGLAS_INICIALES },
+    bitacora: [],
     reportes: [
       { id: 'rep1', profId: 'gomez', obraSocial: 'OSDE', pacienteId: 'pac2', hora: -96 },
       { id: 'rep2', profId: 'gomez', obraSocial: 'OSDE', pacienteId: 'pac3', hora: -48 },
@@ -65,7 +107,16 @@ export function crearEstadoInicial() {
     ],
     resenas: [
       { id: 'res1', profId: 'ruiz', pacienteId: 'pac9', puntaje: 5, hora: -336, estado: 'publicada',
-        texto: 'Muy clara y puntual. Me ayudó a ordenar el tratamiento desde la primera consulta.', moderacion: null, mensajeOperador: null },
+        texto: 'Muy clara y puntual. Me ayudó a ordenar el tratamiento desde la primera consulta.', moderacion: null, mensajeOperador: null,
+        respuesta: { texto: 'Gracias por tu comentario, me alegra que te haya servido.', hora: -330 } },
+      { id: 'res2', profId: 'ruiz', pacienteId: 'pac6', puntaje: 4, hora: -190, estado: 'publicada',
+        texto: 'Escucha con atención y explica bien cada paso. Los turnos a veces se demoran unos minutos.', moderacion: null, mensajeOperador: null },
+      { id: 'res3', profId: 'ruiz', pacienteId: 'pac7', puntaje: 5, hora: -70, estado: 'publicada',
+        texto: 'Me sentí cómodo desde la primera sesión. Muy recomendable.', moderacion: null, mensajeOperador: null },
+      { id: 'res4', profId: 'herrera', pacienteId: 'pac1', puntaje: 5, hora: -120, estado: 'publicada',
+        texto: 'Cálido y profesional. Las sesiones online funcionan muy bien.', moderacion: null, mensajeOperador: null },
+      { id: 'res5', profId: 'paez', pacienteId: 'pac1', puntaje: 4, hora: -400, estado: 'publicada',
+        texto: 'Atendió a mi hija con paciencia. Recomendable.', moderacion: null, mensajeOperador: null },
     ],
     alertas: [],
     casos: [

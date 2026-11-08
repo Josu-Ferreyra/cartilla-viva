@@ -12,6 +12,25 @@ export const TIPO_CASO = {
   disputa:                 { texto: 'En disputa',      tono: 'durazno' },
 };
 
+export const ESTADO_MATRICULA = {
+  vigente:    { texto: 'Vigente',    tono: 'menta' },
+  por_vencer: { texto: 'Por vencer', tono: 'manteca' },
+  observada:  { texto: 'Observada',  tono: 'durazno' },
+  suspendida: { texto: 'Suspendida', tono: 'rosa' },
+};
+
+export const ESTADO_ANUNCIO = {
+  pendiente: { texto: 'Pendiente', tono: 'manteca' },
+  aprobado:  { texto: 'Aprobado',  tono: 'menta' },
+  rechazado: { texto: 'Rechazado', tono: 'rosa' },
+};
+
+export const ESTADO_RESENA = {
+  publicada: { texto: 'Publicada',        tono: 'menta' },
+  retenida:  { texto: 'En revisión',      tono: 'manteca' },
+  rechazada: { texto: 'Pedimos cambios',  tono: 'rosa' },
+};
+
 const PLAZO_HORAS = 48;
 
 // 'hoy' (< 24 h) | 'ayer' | 'hace N días'
@@ -63,4 +82,19 @@ export function iniciales(nombre) {
     .slice(0, 2)
     .map((p) => p[0].toUpperCase())
     .join('');
+}
+
+// Antigüedad corta para listas: 'ahora' | 'hace 5 h' | 'hace 3 d'
+export function haceCorto(hora, ahora) {
+  const dif = ahora - hora;
+  if (dif < 1) return 'ahora';
+  if (dif < 24) return `hace ${Math.floor(dif)} h`;
+  return `hace ${Math.floor(dif / 24)} d`;
+}
+
+// 'hoy' | 'ayer' | 'hace N días' hacia atrás; 'en N días' hacia adelante
+export function enDias(hora, ahora) {
+  const dias = Math.round((hora - ahora) / 24);
+  if (dias === 0) return 'hoy';
+  return dias > 0 ? `en ${dias} días` : `hace ${-dias} días`;
 }
