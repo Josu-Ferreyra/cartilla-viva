@@ -1,1 +1,55 @@
 /* Área 01 · prefijo pac- */
+
+/* Búsqueda: barra */
+.pac-barra { margin-top: 40px; background: var(--cv-superficie); border-radius: 28px; padding: 10px; box-shadow: var(--sombra); display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.pac-campo { flex: 1 1 200px; padding: 12px 24px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
+.pac-campo + .pac-campo { border-left: 1px solid var(--cv-linea); }
+.pac-campo__rotulo { font-size: 12px; color: var(--cv-tenue); }
+.pac-campo__select { border: 0; background: none; padding: 0; font-size: 16px; font-weight: 500; color: var(--cv-tinta); appearance: none; -webkit-appearance: none; cursor: pointer; }
+
+/* Búsqueda: columnas */
+.pac-columnas { margin-top: 64px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start; }
+.pac-resultados { flex: 999 1 600px; min-width: 0; }
+.pac-resultados__encabezado { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.pac-resultados__titulo { margin: 0; font-size: 18px; font-weight: 600; }
+.pac-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.pac-vacio { margin: 0; font-size: 16px; color: var(--cv-tinta-2); }
+
+/* Búsqueda: fila de resultado */
+/* En escritorio la fila no se parte: el bloque del nombre se achica y su texto baja de renglón. */
+.pac-fila { padding: 24px 28px; display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; }
+@media (max-width: 760px) { .pac-fila { flex-wrap: wrap; } }
+.pac-fila__datos { flex: 1 1 220px; min-width: 0; }
+.pac-fila__nombre { margin: 0; font-size: 17px; font-weight: 600; }
+.pac-fila__meta { margin: 4px 0 0; }
+.pac-puntaje { margin: 0; min-width: 72px; text-align: right; }
+.pac-puntaje strong { color: var(--cv-tinta); font-weight: 600; }
+.pac-ver-perfil { font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+/* Búsqueda: lateral */
+.pac-lateral { flex: 1 1 280px; min-width: 0; padding-top: 44px; display: flex; flex-direction: column; gap: 20px; }
+.pac-anuncio { background: var(--cv-superficie-suave); border-radius: 22px; padding: 28px; }
+.pac-anuncio__titulo { margin: 16px 0 0; font-size: 16px; font-weight: 600; }
+.pac-anuncio__texto { margin: 8px 0 0; line-height: 1.5; }
+.pac-leyenda { padding: 4px 28px; display: flex; flex-direction: column; gap: 14px; }
+.pac-leyenda__fila { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--cv-tinta-2); }
+.pac-punto { width: 10px; height: 10px; border-radius: 999px; flex-shrink: 0; display: inline-block; }
+
+/* Perfil */
+.pac-perfil-columnas { margin-top: 24px; }
+.pac-perfil-sub { margin: 8px 0 0; font-size: 16px; color: var(--cv-tenue); }
+.pac-coberturas { list-style: none; margin: 0; background: var(--cv-superficie); border-radius: 22px; padding: 8px 32px; }
+.pac-cob-fila { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.pac-cob-fila__nombre { font-size: 16px; font-weight: 500; }
+.pac-reporte-enlace { align-self: flex-start; }
+.pac-reporte-hecho { margin: 0; }
+.pac-enlace-fuerte { font-weight: 600; text-decoration: none; }
+
+/* Perfil: reseñas */
+.pac-resenas { padding: 32px; }
+.pac-puntaje-grande { font-size: 44px; font-weight: 600; letter-spacing: -1px; line-height: 1; }
+.pac-resena { border-top: 1px solid var(--cv-linea); padding-top: 24px; }
+.pac-resena__texto { margin: 0; font-size: 15px; line-height: 1.6; color: var(--cv-tinta-2); }
+.pac-resena__meta { margin: 8px 0 0; font-size: 13px; }
+.pac-aviso-resena { padding: 24px 28px; }
+.pac-aviso-resena a { color: inherit; }
