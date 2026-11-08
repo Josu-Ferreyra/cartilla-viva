@@ -2,9 +2,14 @@
 
 /* Búsqueda: barra */
 .pac-barra { margin-top: 40px; background: var(--cv-superficie); border-radius: 28px; padding: 10px; box-shadow: var(--sombra); display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
-.pac-campo { flex: 1 1 200px; padding: 12px 24px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
+.pac-campo { flex: 1 1 200px; min-width: 0; padding: 12px 24px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
 .pac-campo + .pac-campo { border-left: 1px solid var(--cv-linea); }
 .pac-campo__rotulo { font-size: 12px; color: var(--cv-tenue); }
+.pac-campo__input { width: 100%; padding: 0; border: 0; background: none; font: inherit; font-size: 16px; font-weight: 500; color: var(--cv-tinta); }
+.pac-campo__input::placeholder { color: var(--cv-tenue); font-weight: 400; }
+.pac-orden { display: flex; align-items: center; gap: 10px; min-width: 0; max-width: 100%; cursor: pointer; }
+.pac-orden .cv-meta { flex-shrink: 0; }
+.pac-orden .cv-selector { width: auto; min-width: 0; }
 
 /* Búsqueda: columnas */
 .pac-columnas { margin-top: 64px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start; }
@@ -19,7 +24,7 @@
 .pac-fila { padding: 24px 28px; display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; }
 @media (max-width: 760px) { .pac-fila { flex-wrap: wrap; } }
 .pac-fila__datos { flex: 1 1 220px; min-width: 0; }
-.pac-fila__nombre { margin: 0; font-size: 17px; font-weight: 600; }
+.pac-fila__nombre { margin: 0; overflow-wrap: anywhere; font-size: 17px; font-weight: 600; }
 .pac-fila__meta { margin: 4px 0 0; }
 .pac-puntaje { margin: 0; min-width: 72px; text-align: right; }
 .pac-puntaje strong { color: var(--cv-tinta); font-weight: 600; }

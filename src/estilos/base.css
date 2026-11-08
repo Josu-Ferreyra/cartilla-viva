@@ -91,12 +91,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Selector (lista desplegable propia) */
 .cv-selector { position: relative; width: 100%; }
-.cv-selector__boton { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 0; text-align: left; cursor: pointer; font-size: 16px; color: var(--cv-tinta); }
+.cv-selector__boton { width: 100%; min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 0; text-align: left; cursor: pointer; font-size: 16px; color: var(--cv-tinta); }
 .cv-selector__valor { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cv-selector__flecha { flex-shrink: 0; color: var(--cv-tenue); transition: transform .15s ease; }
 .cv-selector__boton[aria-expanded="true"] .cv-selector__flecha { transform: rotate(180deg); }
-.cv-selector__lista { position: absolute; z-index: 20; top: calc(100% + 8px); left: 0; min-width: 100%; max-height: 280px; overflow-y: auto; margin: 0; padding: 6px; list-style: none; background: var(--cv-superficie); border-radius: var(--radio-campo); box-shadow: 0 2px 4px rgba(31,36,48,.06), 0 16px 40px rgba(31,36,48,.14); }
-.cv-selector__opcion { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 0 14px; border-radius: 12px; font-size: 15px; color: var(--cv-tinta-2); cursor: pointer; white-space: nowrap; }
+.cv-selector__lista { position: absolute; z-index: 20; top: calc(100% + 8px); left: 0; min-width: 100%; max-width: min(360px, calc(100vw - 32px)); max-height: 280px; overflow-y: auto; margin: 0; padding: 6px; list-style: none; background: var(--cv-superficie); border-radius: var(--radio-campo); box-shadow: 0 2px 4px rgba(31,36,48,.06), 0 16px 40px rgba(31,36,48,.14); }
+.cv-selector__opcion { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 10px 14px; border-radius: 12px; font-size: 15px; color: var(--cv-tinta-2); cursor: pointer; }
+.cv-selector__opcion > svg { flex-shrink: 0; }
 .cv-selector__opcion--activa { background: var(--cv-superficie-suave); color: var(--cv-tinta); }
 .cv-selector__opcion[aria-selected="true"] { color: var(--menta-texto-fuerte); font-weight: 600; }
 .cv-selector__opcion[aria-selected="true"].cv-selector__opcion--activa { background: var(--menta-fondo); }
@@ -107,6 +108,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Variante barra: sin fondo, dentro de la barra de búsqueda */
 .cv-selector--barra .cv-selector__boton { padding: 0; background: none; font-weight: 500; }
+.cv-selector--orden .cv-selector__boton { padding: 0; background: none; font-size: 14px; font-weight: 600; }
+.cv-selector--orden .cv-selector__lista { left: auto; right: 0; }
 .cv-selector--barra .cv-selector__lista { top: calc(100% + 20px); left: -24px; min-width: calc(100% + 48px); }
+@media (max-width: 480px) { .cv-selector--barra .cv-selector__lista { left: -8px; min-width: calc(100% + 16px); } }
 
 .cv-selector__boton:focus-visible { outline: 2px solid var(--menta-punto); outline-offset: 2px; }

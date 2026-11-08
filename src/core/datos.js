@@ -3,7 +3,8 @@ import { crearResenasSemilla } from './resenasSemilla.js';
 export const ESPECIALIDADES = ['Psicología', 'Clínica médica', 'Pediatría', 'Nutrición'];
 export const COBERTURAS = ['OSEP', 'OSDE'];               // 'Particular' no es obra social: no se verifica ni se busca
 export const ZONAS = ['Godoy Cruz', 'Ciudad de Mendoza', 'Luján de Cuyo', 'Guaymallén'];
-export const BUSQUEDA_INICIAL = { especialidad: 'Psicología', cobertura: 'OSEP', zona: 'Godoy Cruz' };
+export const TODOS = 'TODOS';                           // valor «sin filtrar» de los desplegables del buscador
+export const BUSQUEDA_INICIAL = { nombre: '', especialidad: TODOS, cobertura: TODOS, plan: '', zona: TODOS };
 
 // estado de cobertura: 'verificada' | 'declarada' | 'sin_confirmar' | 'en_disputa' | 'baja'
 const cob = (obraSocial, estado, verificadaEn, cambioEn = verificadaEn) =>
