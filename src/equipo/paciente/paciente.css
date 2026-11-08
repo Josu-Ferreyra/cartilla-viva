@@ -5,6 +5,10 @@
 .pac-campo { flex: 1 1 200px; padding: 12px 24px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
 .pac-campo + .pac-campo { border-left: 1px solid var(--cv-linea); }
 .pac-campo__rotulo { font-size: 12px; color: var(--cv-tenue); }
+.pac-campo__input { width: 100%; padding: 0; border: 0; background: none; font: inherit; font-size: 16px; font-weight: 500; color: var(--cv-tinta); }
+.pac-campo__input::placeholder { color: var(--cv-tenue); font-weight: 400; }
+.pac-orden { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.pac-orden .cv-selector { width: auto; }
 
 /* Búsqueda: columnas */
 .pac-columnas { margin-top: 64px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start; }

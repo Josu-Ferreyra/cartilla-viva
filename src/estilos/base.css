@@ -107,6 +107,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Variante barra: sin fondo, dentro de la barra de búsqueda */
 .cv-selector--barra .cv-selector__boton { padding: 0; background: none; font-weight: 500; }
+.cv-selector--orden .cv-selector__boton { padding: 0; background: none; font-size: 14px; font-weight: 600; }
+.cv-selector--orden .cv-selector__lista { left: auto; right: 0; }
 .cv-selector--barra .cv-selector__lista { top: calc(100% + 20px); left: -24px; min-width: calc(100% + 48px); }
 
 .cv-selector__boton:focus-visible { outline: 2px solid var(--menta-punto); outline-offset: 2px; }
