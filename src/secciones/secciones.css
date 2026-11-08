@@ -12,7 +12,7 @@
 
 /* Formularios */
 .sec-campo { display: flex; flex-direction: column; gap: 8px; }
-.sec-input, .sec-select, .sec-area { width: 100%; min-height: 48px; padding: 0 16px; border: 0; border-radius: 14px; background: var(--cv-fondo); font-size: 16px; color: var(--cv-tinta); }
+.sec-input, .sec-area { width: 100%; min-height: 48px; padding: 0 16px; border: 0; border-radius: 14px; background: var(--cv-fondo); font-size: 16px; color: var(--cv-tinta); }
 .sec-area { padding: 14px 16px; line-height: 1.55; resize: vertical; min-height: 110px; }
 .sec-input[aria-invalid="true"], .sec-area[aria-invalid="true"] { outline: 2px solid var(--rosa-punto); }
 .sec-error { margin: 0; font-size: 13px; color: var(--rosa-texto); }

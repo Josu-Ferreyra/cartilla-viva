@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Pagina from '../componentes/Pagina.jsx';
 import Chip from '../componentes/Chip.jsx';
+import Selector from '../componentes/Selector.jsx';
 import { useApp } from '../core/store.jsx';
 import { ESPECIALIDADES, ZONAS } from '../core/datos.js';
 import { ESTADO_ANUNCIO, enDias } from '../core/formato.js';
@@ -62,6 +63,7 @@ function FormularioNuevo({ onCargado }) {
   const [nuevo, setNuevo] = useState(NUEVO_VACIO);
   const valido = nuevo.titulo.trim().length >= 3 && nuevo.texto.trim().length >= 10;
   const cambiar = (campo) => (ev) => setNuevo((n) => ({ ...n, [campo]: ev.target.value }));
+  const cambiarValor = (campo) => (v) => setNuevo((n) => ({ ...n, [campo]: v }));
 
   const enviar = (ev) => {
     ev.preventDefault();
@@ -85,15 +87,11 @@ function FormularioNuevo({ onCargado }) {
       </div>
       <div className="sec-campo">
         <label className="cv-etiqueta" htmlFor="aviso-esp">Especialidad</label>
-        <select id="aviso-esp" className="sec-select" value={nuevo.especialidad} onChange={cambiar('especialidad')}>
-          {ESPECIALIDADES.map((e) => <option key={e}>{e}</option>)}
-        </select>
+        <Selector id="aviso-esp" value={nuevo.especialidad} opciones={ESPECIALIDADES} onChange={cambiarValor('especialidad')} />
       </div>
       <div className="sec-campo">
         <label className="cv-etiqueta" htmlFor="aviso-zona">Zona</label>
-        <select id="aviso-zona" className="sec-select" value={nuevo.zona} onChange={cambiar('zona')}>
-          {ZONAS.map((z) => <option key={z}>{z}</option>)}
-        </select>
+        <Selector id="aviso-zona" value={nuevo.zona} opciones={ZONAS} onChange={cambiarValor('zona')} />
       </div>
       <button type="submit" className="cv-boton cv-boton--primario" disabled={!valido}>Enviar a revisión</button>
     </form>
