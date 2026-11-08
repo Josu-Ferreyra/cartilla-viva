@@ -1,1 +1,34 @@
 /* Área 02 · prefijo mod- */
+
+/* Puntaje */
+.mod-estrellas { display: flex; gap: 4px; }
+.mod-estrella { width: 48px; height: 48px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 12px; }
+
+/* Resultado */
+.mod-motivos { margin: 12px 0 0; padding: 0 0 0 20px; font-size: 15px; line-height: 1.6; }
+.mod-aviso-chico { margin: 12px 0 0; font-size: 14px; line-height: 1.5; }
+
+/* Reglas públicas */
+.mod-regla { display: flex; gap: 14px; }
+.mod-regla__n { font-size: 14px; font-weight: 600; color: var(--cv-tenue); width: 18px; flex-shrink: 0; }
+.mod-regla__texto { margin: 0; font-size: 15px; line-height: 1.55; }
+.mod-pie-fuente { margin: 8px 0 0; font-size: 13px; line-height: 1.5; }
+
+/* Registro de llamadas (evidencia) */
+.mod-registro { font-size: 13px; background: var(--cv-superficie); border-radius: var(--radio-campo); padding: 16px 20px; }
+.mod-registro summary { cursor: pointer; font-weight: 500; font-size: 14px; }
+.mod-registro__vacio { margin: 12px 0 0; font-size: 13px; }
+.mod-registro__tabla-wrap { overflow-x: auto; margin-top: 12px; }
+.mod-registro__tabla { width: 100%; border-collapse: collapse; font-size: 13px; }
+.mod-registro__tabla th { text-align: left; font-weight: 500; color: var(--cv-tenue); padding: 6px 6px 6px 0; border-bottom: 1px solid var(--cv-linea); }
+.mod-registro__tabla td { padding: 8px 6px 8px 0; border-bottom: 1px solid var(--cv-linea); vertical-align: middle; }
+.mod-registro__error { color: var(--rosa-texto); }
+.mod-registro__acciones { margin-top: 12px; }
+
+/* Detalle del operador */
+.mod-propuesta { color: var(--cv-tinta); font-weight: 600; }
+.mod-cita { margin: 0; padding: 28px 32px; background: var(--cv-fondo); border-radius: 20px; font-size: 18px; line-height: 1.6; }
+.mod-marca { padding: 2px 6px; border-radius: 6px; }
+.mod-marca--dato { background: var(--manteca-fondo); color: var(--manteca-texto-fuerte); }
+.mod-marca--insulto { background: var(--rosa-fondo); color: var(--rosa-texto-fuerte); }
+.mod-porque { display: flex; gap: 14px; align-items: center; font-size: 16px; }
