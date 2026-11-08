@@ -140,7 +140,8 @@ export default function Perfil({ profId }) {
   }
 
   const conAviso = prof.coberturas.filter((c) => c.estado === 'sin_confirmar' || c.estado === 'en_disputa');
-  const publicadas = selResenasPublicadas(estado, prof.id).slice(0, 2);
+  const todasPublicadas = selResenasPublicadas(estado, prof.id);
+  const publicadas = todasPublicadas.slice(0, 2);
 
   return (
     <div className="cv-pagina">
@@ -194,6 +195,9 @@ export default function Perfil({ profId }) {
                   <p className="cv-meta pac-resena__meta">Paciente · {haceTiempo(r.hora, estado.ahora)}</p>
                 </div>
               ))}
+              {todasPublicadas.length > 0 && (
+                <a className="pac-enlace-fuerte" href={`#/resenas/${prof.id}`}>Ver todas las reseñas y filtrar por estrellas →</a>
+              )}
               <a className="pac-enlace-fuerte" href={`#/resena/${prof.id}`}>Escribir una reseña →</a>
             </div>
             <EstadoResenaPropia prof={prof} estado={estado} />
