@@ -2,7 +2,7 @@
 // también lo importa el script de Node (evidencia/probar-a2.mjs).
 const URL_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 
-export async function generarJSON({ apiKey, modelo, instrucciones, texto, timeoutMs = 8000 }) {
+export async function generarJSON({ apiKey, modelo, instrucciones, texto, timeoutMs = 12000 }) {
   const t0 = Date.now();
   const r = await fetch(`${URL_BASE}/${modelo}:generateContent`, {
     method: 'POST',
@@ -11,7 +11,7 @@ export async function generarJSON({ apiKey, modelo, instrucciones, texto, timeou
     body: JSON.stringify({
       systemInstruction: { parts: [{ text: instrucciones }] },
       contents: [{ role: 'user', parts: [{ text: texto }] }],
-      generationConfig: { temperature: 0, maxOutputTokens: 400, responseMimeType: 'application/json' },
+      generationConfig: { temperature: 0, maxOutputTokens: 2048, responseMimeType: 'application/json' },
     }),
   });
   if (!r.ok) throw new Error(`Gemini HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`);

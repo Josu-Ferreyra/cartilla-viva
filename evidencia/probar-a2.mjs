@@ -11,7 +11,7 @@ const PAUSA_MS = 4000; // para no pasar el límite gratuito de pedidos por minut
 const carpeta = dirname(fileURLToPath(import.meta.url));
 
 const apiKey = process.env.VITE_GEMINI_API_KEY;
-const modelo = process.env.VITE_GEMINI_MODEL || MODELO_POR_DEFECTO;
+const modelo = process.env.VITE_GEMINI_MODEL || MODELO_POR_DEFECTO; // admite varios, separados por coma
 
 if (!apiKey) {
   console.error('Falta la clave de Gemini.');

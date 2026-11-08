@@ -19,7 +19,7 @@ Código: [`src/equipo/moderacion/`](../src/equipo/moderacion/)
    ```bash
    npm install
    npm run dev        # la app en http://localhost:5173 → #/resena/ruiz
-   npm run probar:ia  # corre los 20 casos contra Gemini y genera los resultados
+   npm run probar:ia  # corre los casos de prueba contra Gemini y genera los resultados
    ```
 4. En la consola del navegador (modo dev) también se puede correr `window.__a2.correrPruebas()`.
 
